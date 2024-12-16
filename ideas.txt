@@ -1,0 +1,3 @@
+Interfaz grafica con custom tkinter
+camaras ilimitas
+se almacenen en el lugar que el usuario elija?
