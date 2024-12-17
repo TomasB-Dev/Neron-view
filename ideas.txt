@@ -1,7 +1,0 @@
-Interfaz grafica con custom tkinter
-camaras ilimitas
-se almacenen en el lugar que el usuario elija?
-Hacer un inicio de sesion
-provicional??
-cambiar fondo?
-    
