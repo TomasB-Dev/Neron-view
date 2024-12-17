@@ -35,6 +35,10 @@ def Ui():
                             corner_radius=CORNER_RADIO_ENTRYS,
                             font=LOGIN_FONT)
     user_key.place(x=450,y=370)
+    def get_datos():
+        usuario = user_login.get()
+        clave = user_key.get()
+        validar_user(usuario,clave)
 
     login_btn = ctk.CTkButton(root,
                             text="LOGIN",
@@ -46,7 +50,8 @@ def Ui():
                             text_color=NEGRO,
                             width=WIDTH_LOGIN,
                             font=LOGIN_FONT,
-                            command=validad_user(user_login.get(),user_key.get())
+                            hover_color = HOVER_COLOR,
+                            command=get_datos
                             )
     login_btn.place(x=450,y=450)
 
