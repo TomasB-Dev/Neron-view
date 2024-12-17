@@ -45,7 +45,9 @@ def Ui():
                             fg_color=DORADO_BOTON,
                             text_color=NEGRO,
                             width=WIDTH_LOGIN,
-                            font=LOGIN_FONT)
+                            font=LOGIN_FONT,
+                            command=validad_user(user_login.get(),user_key.get())
+                            )
     login_btn.place(x=450,y=450)
 
     root.mainloop()
