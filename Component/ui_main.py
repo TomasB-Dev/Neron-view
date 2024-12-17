@@ -38,7 +38,7 @@ def Ui():
     def get_datos():
         usuario = user_login.get()
         clave = user_key.get()
-        validar_user(usuario,clave)
+        validar_user(usuario,clave,root)
 
     login_btn = ctk.CTkButton(root,
                             text="LOGIN",
