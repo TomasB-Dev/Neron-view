@@ -2,7 +2,6 @@ from tkinter import messagebox
 from Component.loged_user_ui import *
 #momentaneo hasta tener base de datos, web etc.
 def validar_user(user,key,root):
-    print(user,"////", key)
     if user == "user" and key == "key":
         loged_user(user,root)
     else:

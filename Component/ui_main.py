@@ -6,15 +6,15 @@ def Ui():
     ctk.set_appearance_mode("dark")
     root = ctk.CTk()
     #configurar de la venta main
-
+    root.after(201, lambda :root.iconbitmap(RUTA_ICONO))
     root.title(APP_NAME)
     root.resizable(0,0)
     root.geometry(APP_SCREEN)
     #obtener datos provicional
     #iniciar sesion
-    logo_main = ctk.CTkImage(Image.open("Resources/images/Logo.png"),size=(250,250))
+    logo_main = ctk.CTkImage(Image.open("Resources/images/Neron_logo.png"),size=(300,250))
     ver_imagen = ctk.CTkLabel(root,text="",image=logo_main)
-    ver_imagen.place(x=510,y=50)
+    ver_imagen.place(x=500,y=50)
     user_login = ctk.CTkEntry(root,
                             width=WIDTH_LOGIN,
                             placeholder_text="Usuario",
