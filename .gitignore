@@ -1,2 +1,9 @@
-#ignorar archivo de las ideas
-ideas.txt
+# Ignorar archivos .env
+Component/.env
+
+
+# Ignorar directorios y archivos comunes
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
