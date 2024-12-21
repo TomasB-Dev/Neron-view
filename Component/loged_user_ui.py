@@ -6,6 +6,7 @@ from tkinter import Label, Frame
 from PIL import Image, ImageTk
 import os
 from Component.ui_config import *
+from Component.detectar_personas import *
 from dotenv import load_dotenv
 load_dotenv(dotenv_path="Component/.env")
 cam1 = None
@@ -20,7 +21,13 @@ def show_camera(cam, cam_lbl):
     while not stop_threads:
         ret, frame = cam.read()
         if ret:
+            
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            
+            
+            frame = detect_and_draw_people(frame)
+            
+            
             frame_resized = cv2.resize(frame, (250, 250))
             if frame_resized is not None and frame_resized.size > 0:
                 im = Image.fromarray(frame_resized)
