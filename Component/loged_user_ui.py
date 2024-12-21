@@ -5,11 +5,15 @@ import threading
 from tkinter import Label, Frame
 from PIL import Image, ImageTk
 import os
+from Component.ui_config import *
 from dotenv import load_dotenv
 load_dotenv(dotenv_path="Component/.env")
 cam1 = None
 cam2 = None
 cam3 = None
+cam4 = None
+cam5 = None
+cam6 = None
 stop_threads = False
 def show_camera(cam, cam_lbl):
     global stop_threads
@@ -29,19 +33,26 @@ def show_camera(cam, cam_lbl):
         cv2.waitKey(10)
 
 def start_capture():
-    global cam1, cam2, cam3, stop_threads, cam_lbl1, cam_lbl2, cam_lbl3, start_btn
-
+    global cam1, cam2, cam3,cam4, stop_threads, cam_lbl1, cam_lbl2, cam_lbl3,cam_lbl4,cam_lbl5,cam_lbl6, start_btn
+    
+    camara0 = os.getenv("CAM0")
     camara1 = os.getenv("CAM1")
     camara2 = os.getenv("CAM2")
+    camara3 = os.getenv("CAM3")
+    camara4 = os.getenv("CAM4")
+    camara5 = os.getenv("CAM5")
 
 
     if cam1 is None and cam2 is None and cam3 is None:
-        # Inicializar cámaras
-        cam1 = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+        # inicializar camaras
+        cam1 = cv2.VideoCapture(camara0)
         cam2 = cv2.VideoCapture(camara1)
         cam3 = cv2.VideoCapture(camara2)
+        cam4 = cv2.VideoCapture(camara3)
+        cam5 = cv2.VideoCapture(camara4)
+        cam6 = cv2.VideoCapture(camara5)
 
-        # Verificar cada cámara
+        # verificar cada camara
         if not cam1.isOpened():
             cam_lbl1.configure(text="Error al abrir la camara 1")
             cam1 = None
@@ -59,8 +70,24 @@ def start_capture():
             cam3 = None
         else:
             threading.Thread(target=show_camera, args=(cam3, cam_lbl3), daemon=True).start()
+        
+        if not cam4.isOpened():
+            cam_lbl4.configure(text="Error al abrir la camara 4")
+            cam4 = None
+        else:
+            threading.Thread(target=show_camera, args=(cam4, cam_lbl4), daemon=True).start()
+        if not cam5.isOpened():
+            cam_lbl5.configure(text="Error al abrir la camara 5")
+            cam5 = None
+        else:
+            threading.Thread(target=show_camera, args=(cam6, cam_lbl6), daemon=True).start()
+        if not cam6.isOpened():
+            cam_lbl6.configure(text="Error al abrir la camara 6")
+            cam6 = None
+        else:
+            threading.Thread(target=show_camera, args=(cam6, cam_lbl6), daemon=True).start()
 
-        # Actualizar texto del botón
+        # act boton
         start_btn.configure(text="Detener")
 
     else:
@@ -75,26 +102,41 @@ def start_capture():
         if cam3:
             cam3.release()
             cam_lbl3.configure(image=None, text="DETENIDO")
+        if cam4:
+            cam4.release()
+            cam_lbl4.configure(image=None, text="DETENIDO")
+        if cam5:
+            cam5.release()
+            cam_lbl5.configure(image=None, text="DETENIDO")
+        if cam6:
+            cam6.release()
+            cam_lbl6.configure(image=None, text="DETENIDO")
 
-        # Resetear variables
+        # resetear variables
         start_btn.configure(text="Comenzar")
         cam1 = None
         cam2 = None
         cam3 = None
+        cam4 = None
+        cam5 = None
+        cam6 = None
+        
 
 def loged_user(usuario, root):
 
-    global cam_lbl1, start_btn, cam_lbl2, cam_lbl3
+    global cam_lbl1, start_btn, cam_lbl2, cam_lbl3,cam_lbl4,cam_lbl5,cam_lbl6
     root.destroy()
-    ctk.set_appearance_mode("dark")
+    ctk.set_appearance_mode("dark") 
     root = ctk.CTk()
+    root.after(201, lambda :root.iconbitmap(RUTA_ICONO))
     root.title(APP_NAME + f" ({usuario})")
     root.resizable(0, 0)
     root.geometry(APP_SCREEN)
 
     config_btn = ctk.CTkButton(
         root, text="Configuracion", font=LOGIN_FONT,
-        height=HEIGHT_BOTONES, corner_radius=10, border_width=2
+        height=HEIGHT_BOTONES, corner_radius=10, border_width=2,
+        command= Config_Ui
     )
     config_btn.place(x=20, y=20)
 
@@ -104,15 +146,25 @@ def loged_user(usuario, root):
         command=start_capture
     )
     start_btn.place(x=200, y=20)
-    #Espacios para las camaras
+    #espacios para las camaras
     cam_lbl1 = ctk.CTkLabel(root, text="")
-    cam_lbl1.place(x=20, y=100)
+    cam_lbl1.place(x=X_CAMARA1, y=100)
 
     cam_lbl2 = ctk.CTkLabel(root, text="")
-    cam_lbl2.place(x=400, y=100)
+    cam_lbl2.place(x=X_CAMARA2, y=100)
 
     cam_lbl3 = ctk.CTkLabel(root,text="")
-    cam_lbl3.place(x=780,y=100)
+    cam_lbl3.place(x=X_CAMARA3,y=100)
+
+    cam_lbl4 = ctk.CTkLabel(root,text="")
+    cam_lbl4.place(x=X_CAMARA1,y=500)
+
+    cam_lbl5 = ctk.CTkLabel(root,text="")
+    cam_lbl5.place(x=X_CAMARA2,y=500)
+
+    cam_lbl6 = ctk.CTkLabel(root,text="")
+    cam_lbl6.place(x=X_CAMARA3,y=500)
+
 
 
 
