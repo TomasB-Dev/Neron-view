@@ -6,3 +6,5 @@ def Config_Ui():
     config_cams.after(201, lambda :config_cams.iconbitmap(RUTA_ICONO))
     config_cams.title("Configuracion")
     config_cams.geometry("600x480")
+    config_cams.grab_set()
+    config_cams.resizable(0,0)

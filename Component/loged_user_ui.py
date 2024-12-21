@@ -17,6 +17,7 @@ cam5 = None
 cam6 = None
 stop_threads = False
 def show_camera(cam, cam_lbl):
+    Config_Ui()
     global stop_threads
     while not stop_threads:
         ret, frame = cam.read()
@@ -40,7 +41,7 @@ def show_camera(cam, cam_lbl):
         cv2.waitKey(10)
 
 def start_capture():
-    global cam1, cam2, cam3,cam4, stop_threads, cam_lbl1, cam_lbl2, cam_lbl3,cam_lbl4,cam_lbl5,cam_lbl6, start_btn
+    global cam1, cam2, cam3,cam4,cam5,cam6, stop_threads, cam_lbl1, cam_lbl2, cam_lbl3,cam_lbl4,cam_lbl5,cam_lbl6, start_btn
     
     camara0 = os.getenv("CAM0")
     camara1 = os.getenv("CAM1")
@@ -143,6 +144,7 @@ def loged_user(usuario, root):
     config_btn = ctk.CTkButton(
         root, text="Configuracion", font=LOGIN_FONT,
         height=HEIGHT_BOTONES, corner_radius=10, border_width=2,
+        hover_color = HOVER_COLOR,
         command= Config_Ui
     )
     config_btn.place(x=20, y=20)
@@ -150,6 +152,7 @@ def loged_user(usuario, root):
     start_btn = ctk.CTkButton(
         root, text="Comenzar", font=LOGIN_FONT,
         height=HEIGHT_BOTONES, corner_radius=10, border_width=2,
+        hover_color = HOVER_COLOR,
         command=start_capture
     )
     start_btn.place(x=200, y=20)
